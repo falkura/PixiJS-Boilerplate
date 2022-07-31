@@ -13,12 +13,7 @@ export const IMAGES: Resources = {
       path: "images/project_bg.jpg",
     },
   ],
-  preload: [
-    {
-      key: "loader_bg",
-      path: "images/loader_bg.jpg",
-    },
-  ],
+  preload: [],
 };
 
 // should be in assets/atlases

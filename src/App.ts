@@ -21,6 +21,12 @@ export class App {
   constructor() {
     LogicState.is_mobile = get_platform();
     this.canvas = document.getElementById("root") as HTMLCanvasElement;
+
+    this.canvas.style.width = `100%`;
+    this.canvas.style.height = `100%`;
+    this.canvas.style.marginTop = `0`;
+    this.canvas.style.marginLeft = `0`;
+
     this.app = this.get_pixi_app();
 
     this.setup_events();
@@ -46,54 +52,25 @@ export class App {
 
   on_resize = () => {
     const style = this.canvas.style;
-    let width: number;
-    let height: number;
-    let margin: number;
 
-    if (LogicState.is_mobile && window.innerWidth < window.innerHeight) {
-      const multiplier = window.innerWidth / 810;
+    if (window.innerWidth < window.innerHeight) {
+      const multiplier = window.innerWidth / Config.game_width;
       const target_height = window.innerHeight / multiplier;
 
-      this.app.renderer.resize(810, target_height);
+      this.app.renderer.resize(Config.game_width, target_height);
 
       LogicState.is_landscape = false;
-
-      style.width = `100%`;
-      style.height = `100%`;
-      style.marginTop = `0`;
-      style.marginLeft = `0`;
-      Config.game_width = this.app.view.width;
-      Config.game_height = this.app.view.height;
     } else {
-      this.app.renderer.resize(Config.game_width, Config.game_height);
+      const multiplier = window.innerHeight / Config.game_height;
+      const target_width = window.innerWidth / multiplier;
+
+      this.app.renderer.resize(target_width, Config.game_height);
+
       LogicState.is_landscape = true;
-
-      if (
-        window.innerWidth >
-        (window.innerHeight * Config.game_width) / Config.game_height
-      ) {
-        width = (window.innerHeight / Config.game_height) * Config.game_width;
-        height = window.innerHeight;
-        margin = (window.innerWidth - width) / 2;
-
-        style.width = `${width}px`;
-        style.height = `${height}px`;
-        style.marginTop = `0`;
-        style.marginLeft = `${margin}px`;
-      } else {
-        width = window.innerWidth;
-        height = (window.innerWidth / Config.game_width) * Config.game_height;
-        margin = (window.innerHeight - height) / 2;
-
-        style.width = `${width}px`;
-        style.height = `${height}px`;
-        style.marginTop = `${margin}px`;
-        style.marginLeft = `0`;
-      }
-
-      Config.game_width = LogicState.app_width;
-      Config.game_height = LogicState.app_height;
     }
+
+    Config.game_width = this.app.view.width;
+    Config.game_height = this.app.view.height;
 
     LogicState.notify_all();
 
@@ -134,9 +111,9 @@ export class App {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Object.assign(window as any, {
-      game: this.game,
+      Game: this.game,
       ls: LogicState,
-      app: this,
+      App: this,
       rc: ResourceController,
       Config: Config,
     });
@@ -148,9 +125,9 @@ export class App {
 
   setup_events = () => {
     document.addEventListener(
-      EVENTS.events.preloader_loaded,
+      EVENTS.loading.preloader_loaded,
       this.on_preloader_loaded
     );
-    document.addEventListener(EVENTS.events.game_loaded, this.on_game_loaded);
+    document.addEventListener(EVENTS.loading.game_loaded, this.on_game_loaded);
   };
 }

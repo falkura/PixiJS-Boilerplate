@@ -13,7 +13,7 @@ export class Game {
 
     this.add_event_listeners();
     this.createBG();
-    console.log('HI!')
+    console.log("HI!");
 
     this.resize();
   }
@@ -27,17 +27,13 @@ export class Game {
   add_event_listeners = () => {};
 
   resize = () => {
-    this.bg.scale.set(
-      Config.game_width / this.bg.texture.width >
-        Config.game_height / this.bg.texture.height
-        ? Config.game_width / this.bg.texture.width
-        : Config.game_height / this.bg.texture.height
-    );
+    this.bg.position.set(Config.game_width / 2, Config.game_height / 2);
 
-    if (LogicState.is_mobile) {
-      if (LogicState.is_landscape) {
-      } else {
-      }
-    }
+    this.bg.scale.set(
+      Config.game_width / this.bg.__width >
+        Config.game_height / this.bg.__height
+        ? Config.game_width / this.bg.__width
+        : Config.game_height / this.bg.__height
+    );
   };
 }

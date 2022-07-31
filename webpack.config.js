@@ -56,7 +56,6 @@ const local = {
         compress: true,
         port: 7777,
         open: {
-            // target: [`/?showcheats=true&user_id=${crypto.randomUUID()}`],
             app: {
                 name: process.platform == "linux" ? "google-chrome" : "Chrome",
             },
@@ -71,7 +70,7 @@ const local = {
         }),
         new CopyPlugin({
             patterns: [
-                { from: "./prodIndex.html", to: "./index.html" },
+                { from: "./index.html", to: "./index.html" },
                 { from: "./assets", to: "./assets" },
             ],
         }),
@@ -97,7 +96,7 @@ const dev = {
         new CleanWebpackPlugin(),
         new CopyPlugin({
             patterns: [
-                { from: "./prodIndex.html", to: "./index.html" },
+                { from: "./index.html", to: "./index.html" },
                 { from: "./assets", to: "./assets" },
             ],
         }),

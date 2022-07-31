@@ -1,1 +1,1 @@
-export type AppState = "pre_preloader" | "preloader" | "continue" | "game";
+export type AppState = "pre_preloader" | "preloader" | "game";

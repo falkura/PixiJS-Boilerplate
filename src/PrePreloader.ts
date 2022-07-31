@@ -24,7 +24,7 @@ export class PrePreloader {
 
   createLoader = () => {
     const gr = new PIXI.Graphics()
-      .lineStyle(15, 0x005050, 1) //must be white
+      .lineStyle(15, 0x000000, 1)
       .arc(0, 0, 100, 0, Math.PI);
 
     gr.position.set(this.app.view.width / 2, this.app.view.height / 2);
@@ -38,7 +38,7 @@ export class PrePreloader {
     this.app.ticker.add(rotation);
 
     document.addEventListener(
-      EVENTS.events.preloader_loaded,
+      EVENTS.loading.preloader_loaded,
       () => {
         this.app.ticker.remove(rotation);
       },
@@ -70,7 +70,7 @@ export class PrePreloader {
   }
 
   start_preloader() {
-    document.dispatchEvent(new Event(EVENTS.events.preloader_loaded));
+    document.dispatchEvent(new Event(EVENTS.loading.preloader_loaded));
     AUDIO_MANAGER.init();
   }
 

@@ -77,8 +77,8 @@ export namespace core {
      * @memberof core
      */
     export class Sprite extends PIXI.Sprite {
-        private __width!: number;
-        private __height!: number;
+        __width!: number;
+        __height!: number;
 
         constructor(texture?: PIXI.Texture | undefined) {
             super(texture);
