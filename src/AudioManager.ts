@@ -1,6 +1,5 @@
 import { Howl, Howler } from "howler";
 import { LogicState } from "./logic_state";
-import { SessionConfig } from "./Config";
 
 class AudioManager {
     MUSIC: Howl[] = [];

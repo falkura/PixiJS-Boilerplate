@@ -1,8 +1,6 @@
-import { Config } from "./Config";
 import { AppState } from "./Models";
 import { Subject } from "./Observer";
 
-declare const __ENVIRONMENT__: string;
 class LogicStateClass extends Subject {
     app_state: AppState = "pre_preloader";
 

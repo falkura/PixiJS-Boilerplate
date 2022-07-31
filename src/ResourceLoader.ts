@@ -1,6 +1,5 @@
 import { IResourceDictionary } from "pixi.js";
 import { ANIMATIONS, ATLASES, FONTS, IMAGES } from "./Assets";
-import { core } from "./core/core";
 import { LogicState } from "./logic_state";
 import { SessionConfig } from "./Config";
 
@@ -51,9 +50,9 @@ class Loader {
         return texture;
     };
 
-    getSprite = (key: string): core.Sprite => {
+    getSprite = (key: string): PIXI.Sprite => {
         const texture = this.getTexture(key);
-        return new core.Sprite(texture);
+        return new PIXI.Sprite(texture);
     };
 
     getSpineData = (key: string): PIXI.spine.core.SkeletonData => {
@@ -78,9 +77,9 @@ class Loader {
         return spineData;
     };
 
-    getSpine = (key: string): core.Spine => {
+    getSpine = (key: string): PIXI.spine.Spine => {
         const spineData = this.getSpineData(key);
-        return new core.Spine(spineData);
+        return new PIXI.spine.Spine(spineData);
     };
 
     addResources = (type: ResourceType) => {

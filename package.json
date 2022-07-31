@@ -1,6 +1,6 @@
 {
     "name": "pixijs-boilerplate",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Boilerplate for PixiJS + TS project",
     "main": "index.ts",
     "scripts": {

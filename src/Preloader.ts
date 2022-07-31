@@ -1,8 +1,6 @@
 import { ATLASES } from "./Assets";
 import "./AudioManager";
-import { Config } from "./Config";
 import { EVENTS } from "./Events";
-import { LogicState } from "./logic_state";
 import { ResourceController } from "./ResourceLoader";
 
 export class Preloader {
