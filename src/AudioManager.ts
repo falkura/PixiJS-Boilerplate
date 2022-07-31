@@ -3,47 +3,47 @@ import { LogicState } from "./logic_state";
 import { SessionConfig } from "./Config";
 
 class AudioManager {
-  MUSIC: Howl[] = [];
-  SOUND_FXS: Howl[] = [];
+    MUSIC: Howl[] = [];
+    SOUND_FXS: Howl[] = [];
 
-  constructor() {
-    document.body.addEventListener("pointerdown", this.init, {
-      once: true,
-    });
-  }
-
-  init = () => {
-    // this.some_music = new Howl({
-    //     src: [`${SessionConfig.ASSETS_ADDRESS}audio/some_music.mp3`],
-    // });
-    // this.MUSIC.push(this.some_music);
-    // this.some_sound = new Howl({
-    //     src: [`${SessionConfig.ASSETS_ADDRESS}audio/some_sound.mp3`],
-    // });
-    // this.SOUND_FXS.push(this.some_sound);
-  };
-
-  change_fx_volume = (new_volume: number) => {
-    for (const fx of this.SOUND_FXS) {
-      fx.volume(new_volume);
+    constructor() {
+        document.body.addEventListener("pointerdown", this.init, {
+            once: true,
+        });
     }
-  };
 
-  change_music_volume = (new_volume: number) => {
-    for (const m of this.MUSIC) {
-      m.volume(new_volume);
-    }
-  };
+    init = () => {
+        // this.some_music = new Howl({
+        //     src: [`${SessionConfig.ASSETS_ADDRESS}audio/some_music.mp3`],
+        // });
+        // this.MUSIC.push(this.some_music);
+        // this.some_sound = new Howl({
+        //     src: [`${SessionConfig.ASSETS_ADDRESS}audio/some_sound.mp3`],
+        // });
+        // this.SOUND_FXS.push(this.some_sound);
+    };
+
+    change_fx_volume = (new_volume: number) => {
+        for (const fx of this.SOUND_FXS) {
+            fx.volume(new_volume);
+        }
+    };
+
+    change_music_volume = (new_volume: number) => {
+        for (const m of this.MUSIC) {
+            m.volume(new_volume);
+        }
+    };
 }
 
 export const AUDIO_MANAGER = new AudioManager();
 
 window.addEventListener("blur", () => {
-  Howler.mute(true);
+    Howler.mute(true);
 });
 
 window.addEventListener("focus", () => {
-  if (LogicState.are_sound_fx_on && LogicState.is_music_on) {
-    Howler.mute(false);
-  }
+    if (LogicState.are_sound_fx_on && LogicState.is_music_on) {
+        Howler.mute(false);
+    }
 });

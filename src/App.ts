@@ -11,123 +11,126 @@ import { ResourceController } from "./ResourceLoader";
 declare const __ENVIRONMENT__: string;
 
 export class App {
-  readonly canvas: HTMLCanvasElement;
-  readonly app: PIXI.Application;
-  readonly is_landscape: boolean = true;
-  pre_preloader?: PrePreloader;
-  preloader?: Preloader;
-  game?: Game;
+    readonly canvas: HTMLCanvasElement;
+    readonly app: PIXI.Application;
+    readonly is_landscape: boolean = true;
+    pre_preloader?: PrePreloader;
+    preloader?: Preloader;
+    game?: Game;
 
-  constructor() {
-    LogicState.is_mobile = get_platform();
-    this.canvas = document.getElementById("root") as HTMLCanvasElement;
+    constructor() {
+        LogicState.is_mobile = get_platform();
+        this.canvas = document.getElementById("root") as HTMLCanvasElement;
 
-    this.canvas.style.width = `100%`;
-    this.canvas.style.height = `100%`;
-    this.canvas.style.marginTop = `0`;
-    this.canvas.style.marginLeft = `0`;
+        this.canvas.style.width = `100%`;
+        this.canvas.style.height = `100%`;
+        this.canvas.style.marginTop = `0`;
+        this.canvas.style.marginLeft = `0`;
 
-    this.app = this.get_pixi_app();
+        this.app = this.get_pixi_app();
 
-    this.setup_events();
-    this.load_preloader();
+        this.setup_events();
+        this.load_preloader();
 
-    window.onresize = this.on_resize;
-    this.on_resize();
-  }
-
-  get_pixi_app = () => {
-    PIXI.settings.ROUND_PIXELS = true;
-    PIXI.settings.SORTABLE_CHILDREN = true;
-
-    return new PIXI.Application({
-      width: Config.game_width,
-      height: Config.game_height,
-      view: this.canvas,
-      sharedLoader: true,
-      sharedTicker: true,
-      transparent: true,
-    });
-  };
-
-  on_resize = () => {
-    const style = this.canvas.style;
-
-    if (window.innerWidth < window.innerHeight) {
-      const multiplier = window.innerWidth / Config.game_width;
-      const target_height = window.innerHeight / multiplier;
-
-      this.app.renderer.resize(Config.game_width, target_height);
-
-      LogicState.is_landscape = false;
-    } else {
-      const multiplier = window.innerHeight / Config.game_height;
-      const target_width = window.innerWidth / multiplier;
-
-      this.app.renderer.resize(target_width, Config.game_height);
-
-      LogicState.is_landscape = true;
+        window.onresize = this.on_resize;
+        this.on_resize();
     }
 
-    Config.game_width = this.app.view.width;
-    Config.game_height = this.app.view.height;
+    get_pixi_app = () => {
+        PIXI.settings.ROUND_PIXELS = true;
+        PIXI.settings.SORTABLE_CHILDREN = true;
 
-    LogicState.notify_all();
+        return new PIXI.Application({
+            width: Config.game_width,
+            height: Config.game_height,
+            view: this.canvas,
+            sharedLoader: true,
+            sharedTicker: true,
+            transparent: true,
+        });
+    };
 
-    if (this.game) {
-      this.game.resize();
-    } else if (this.preloader) {
-      this.preloader.resize();
-    } else if (this.pre_preloader) {
-      this.pre_preloader.resize();
-    }
-  };
+    on_resize = () => {
+        const style = this.canvas.style;
 
-  load_preloader = () => {
-    this.pre_preloader = new PrePreloader(this.app);
-    this.app.stage.addChild(this.pre_preloader.container);
-  };
+        if (window.innerWidth < window.innerHeight) {
+            const multiplier = window.innerWidth / Config.game_width;
+            const target_height = window.innerHeight / multiplier;
 
-  on_preloader_loaded = () => {
-    if (this.pre_preloader) {
-      this.app.stage.removeChild(this.pre_preloader.container);
-    }
+            this.app.renderer.resize(Config.game_width, target_height);
 
-    this.preloader = new Preloader(this.app);
-    this.app.stage.addChild(this.preloader.container);
-    LogicState.app_state = "preloader";
-    LogicState.notify_all();
-  };
+            LogicState.is_landscape = false;
+        } else {
+            const multiplier = window.innerHeight / Config.game_height;
+            const target_width = window.innerWidth / multiplier;
 
-  on_game_loaded = () => {
-    this.app.stage.removeChild(this.preloader!.container);
-    this.on_continue();
+            this.app.renderer.resize(target_width, Config.game_height);
 
-    LogicState.notify_all();
-  };
+            LogicState.is_landscape = true;
+        }
 
-  on_continue = () => {
-    this.game = new Game(this.app);
+        Config.game_width = this.app.view.width;
+        Config.game_height = this.app.view.height;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Object.assign(window as any, {
-      Game: this.game,
-      ls: LogicState,
-      App: this,
-      rc: ResourceController,
-      Config: Config,
-    });
+        LogicState.notify_all();
 
-    this.app.stage.addChildAt(this.game.container, 0);
-    LogicState.app_state = "game";
-    LogicState.notify_all();
-  };
+        if (this.game) {
+            this.game.resize();
+        } else if (this.preloader) {
+            this.preloader.resize();
+        } else if (this.pre_preloader) {
+            this.pre_preloader.resize();
+        }
+    };
 
-  setup_events = () => {
-    document.addEventListener(
-      EVENTS.loading.preloader_loaded,
-      this.on_preloader_loaded
-    );
-    document.addEventListener(EVENTS.loading.game_loaded, this.on_game_loaded);
-  };
+    load_preloader = () => {
+        this.pre_preloader = new PrePreloader(this.app);
+        this.app.stage.addChild(this.pre_preloader.container);
+    };
+
+    on_preloader_loaded = () => {
+        if (this.pre_preloader) {
+            this.app.stage.removeChild(this.pre_preloader.container);
+        }
+
+        this.preloader = new Preloader(this.app);
+        this.app.stage.addChild(this.preloader.container);
+        LogicState.app_state = "preloader";
+        LogicState.notify_all();
+    };
+
+    on_game_loaded = () => {
+        this.app.stage.removeChild(this.preloader!.container);
+        this.on_continue();
+
+        LogicState.notify_all();
+    };
+
+    on_continue = () => {
+        this.game = new Game(this.app);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Object.assign(window as any, {
+            Game: this.game,
+            ls: LogicState,
+            App: this,
+            rc: ResourceController,
+            Config: Config,
+        });
+
+        this.app.stage.addChildAt(this.game.container, 0);
+        LogicState.app_state = "game";
+        LogicState.notify_all();
+    };
+
+    setup_events = () => {
+        document.addEventListener(
+            EVENTS.loading.preloader_loaded,
+            this.on_preloader_loaded
+        );
+        document.addEventListener(
+            EVENTS.loading.game_loaded,
+            this.on_game_loaded
+        );
+    };
 }

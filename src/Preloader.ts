@@ -6,32 +6,32 @@ import { LogicState } from "./logic_state";
 import { ResourceController } from "./ResourceLoader";
 
 export class Preloader {
-  readonly container: PIXI.Container;
-  private readonly app: PIXI.Application;
+    readonly container: PIXI.Container;
+    private readonly app: PIXI.Application;
 
-  constructor(app: PIXI.Application) {
-    this.app = app;
-    this.container = new PIXI.Container();
+    constructor(app: PIXI.Application) {
+        this.app = app;
+        this.container = new PIXI.Container();
 
-    this.load_assets();
-    this.resize();
-  }
+        this.load_assets();
+        this.resize();
+    }
 
-  load_assets = () => {
-    ResourceController.addResources("main");
+    load_assets = () => {
+        ResourceController.addResources("main");
 
-    ResourceController.loader.onProgress.add(() => {});
+        ResourceController.loader.onProgress.add(() => {});
 
-    ResourceController.loadResources(() => {
-      for (const atlas of ATLASES["main"]) {
-        Object.assign(
-          ResourceController.resources,
-          ResourceController.resources[atlas.key].textures
-        );
-      }
-      document.dispatchEvent(new Event(EVENTS.loading.game_loaded));
-    });
-  };
+        ResourceController.loadResources(() => {
+            for (const atlas of ATLASES["main"]) {
+                Object.assign(
+                    ResourceController.resources,
+                    ResourceController.resources[atlas.key].textures
+                );
+            }
+            document.dispatchEvent(new Event(EVENTS.loading.game_loaded));
+        });
+    };
 
-  resize = () => {};
+    resize = () => {};
 }
