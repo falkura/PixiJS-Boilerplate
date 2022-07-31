@@ -1,7 +1,7 @@
 {
     "name": "pixijs-boilerplate",
     "version": "1.0.2",
-    "description": "Boilerplate for PixiJS project",
+    "description": "Boilerplate for PixiJS + TS project",
     "main": "index.ts",
     "scripts": {
         "local": "webpack serve --config-name local",
@@ -25,18 +25,21 @@
         "@types/animejs": "^3.1.1",
         "@types/howler": "^2.2.2",
         "animejs": "^3.2.1",
-        "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^9.0.0",
-        "eslint": "^7.28.0",
         "fontfaceobserver": "^2.1.0",
         "howler": "^2.2.1",
         "pixi-spine": "^2.1.10",
         "pixi.js": "^5.3.3",
+        "tslib": "^2.3.1",
+        "webpack": "^5.39.0"
+    },
+    "devDependencies": {
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^9.0.0",
+        "eslint": "^7.28.0",
+        "husky": "^8.0.1",
         "raw-loader": "^4.0.2",
         "ts-loader": "^9.2.3",
-        "tslib": "^2.3.1",
         "url-loader": "^4.1.1",
-        "webpack": "^5.39.0",
         "webpack-cli": "^4.7.2",
         "webpack-dev-server": "^4.9.3"
     }
