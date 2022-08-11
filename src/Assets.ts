@@ -2,26 +2,26 @@ import { Resources } from "./ResourceLoader";
 
 // should be in assets/spine/
 export const ANIMATIONS: Resources = {
-    main: [],
+	main: [],
 };
 
 // should be in assets/images
 export const IMAGES: Resources = {
-    main: [
-        {
-            key: "project_bg",
-            path: "images/project_bg.jpg",
-        },
-    ],
-    preload: [],
+	main: [
+		{
+			key: "project_bg",
+			path: "images/project_bg.jpg",
+		},
+	],
+	preload: [],
 };
 
 // should be in assets/atlases
 export const ATLASES: Resources = {
-    main: [],
+	main: [],
 };
 
 // should be in assets/fonts
 export const FONTS: Resources = {
-    main: [],
+	main: [],
 };
