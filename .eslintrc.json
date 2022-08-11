@@ -1,44 +1,39 @@
 {
-    "root": true,
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "createDefaultProgram": true
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint"],
-    "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+    "plugins": [
+        "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/array-type": [
-            "error",
-            {
-                "default": "array-simple"
-            }
+		"no-empty-function": "off",
+  		"@typescript-eslint/no-empty-function": ["off"],
+
+        "indent": [
+            "off",
+            "tab"
         ],
-        "prettier/prettier": [
+        "linebreak-style": [
             "error",
-            {
-                "endOfLine": "auto"
-            }
+            "windows"
         ],
-        "@typescript-eslint/ban-ts-comment": ["off"],
-        "@typescript-eslint/explicit-member-accessibility": ["off"],
-        "@typescript-eslint/explicit-module-boundary-types": ["off"],
-        "@typescript-eslint/no-non-null-assertion": ["off"],
-        "@typescript-eslint/no-use-before-define": ["off"],
-        "@typescript-eslint/no-parameter-properties": ["off"],
-        "@typescript-eslint/no-unused-vars": [
+        "quotes": [
             "error",
-            {
-                "argsIgnorePattern": "^_",
-                "varsIgnorePattern": "^_"
-            }
+            "double"
         ],
-        "@typescript-eslint/ban-ts-ignore": ["off"],
-        "@typescript-eslint/no-empty-function": ["off"],
-        "no-return-await": "error",
-        "require-await": "error",
-        "no-async-promise-executor": "error"
+        "semi": [
+            "error",
+            "always"
+        ]
     }
 }

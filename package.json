@@ -1,6 +1,6 @@
 {
     "name": "pixijs-boilerplate",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Boilerplate for PixiJS + TS project",
     "main": "index.ts",
     "scripts": {
@@ -36,9 +36,11 @@
         "webpack-dev-server": "^4.9.3"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.33.0",
+        "@typescript-eslint/parser": "^5.33.0",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^9.0.0",
-        "eslint": "^7.28.0",
+        "eslint": "^8.21.0",
         "husky": "^8.0.1",
         "raw-loader": "^4.0.2",
         "ts-loader": "^9.3.1",

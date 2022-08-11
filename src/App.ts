@@ -20,10 +20,10 @@ export class App {
 		LogicState.is_mobile = get_platform();
 		this.canvas = document.getElementById("root") as HTMLCanvasElement;
 
-		this.canvas.style.width = `100%`;
-		this.canvas.style.height = `100%`;
-		this.canvas.style.marginTop = `0`;
-		this.canvas.style.marginLeft = `0`;
+		this.canvas.style.width = "100%";
+		this.canvas.style.height = "100%";
+		this.canvas.style.marginTop = "0";
+		this.canvas.style.marginLeft = "0";
 
 		this.app = this.get_pixi_app();
 
@@ -106,7 +106,7 @@ export class App {
 		this.game = new Game(this.app);
 
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		Object.assign(window as any, {
+		Object.assign(globalThis, {
 			Game: this.game,
 			ls: LogicState,
 			App: this,
