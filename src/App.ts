@@ -8,8 +8,6 @@ import { EVENTS } from "./Events";
 import { get_platform } from "./Util";
 import { ResourceController } from "./ResourceLoader";
 
-declare const __ENVIRONMENT__: string;
-
 export class App {
     readonly canvas: HTMLCanvasElement;
     readonly app: PIXI.Application;
@@ -51,20 +49,18 @@ export class App {
     };
 
     on_resize = () => {
-        const style = this.canvas.style;
-
         if (window.innerWidth < window.innerHeight) {
-            const multiplier = window.innerWidth / Config.game_width;
+            const multiplier = window.innerWidth / LogicState.app_width;
             const target_height = window.innerHeight / multiplier;
 
-            this.app.renderer.resize(Config.game_width, target_height);
+            this.app.renderer.resize(LogicState.app_width, target_height);
 
             LogicState.is_landscape = false;
         } else {
-            const multiplier = window.innerHeight / Config.game_height;
+            const multiplier = window.innerHeight / LogicState.app_height;
             const target_width = window.innerWidth / multiplier;
 
-            this.app.renderer.resize(target_width, Config.game_height);
+            this.app.renderer.resize(target_width, LogicState.app_height);
 
             LogicState.is_landscape = true;
         }

@@ -4,6 +4,9 @@ import { App } from "./App";
 
 declare const __ENVIRONMENT__: string;
 
+/**
+ * Entry point of application
+ */
 function init() {
     document.getElementById("root")!.onmousedown = () => {
         return false;
@@ -14,6 +17,7 @@ function init() {
 
     console.log(full_project_name);
 
+    // Note, that the first (before loading) document title you will see is in the index.html file 
     document.title = full_project_name;
 
     new App();

@@ -3,8 +3,6 @@ import { EVENTS } from "./Events";
 import { AUDIO_MANAGER } from "./AudioManager";
 import { ResourceController } from "./ResourceLoader";
 
-declare const __ENVIRONMENT__: string;
-
 export class PrePreloader {
     readonly container: PIXI.Container;
     private readonly app: PIXI.Application;

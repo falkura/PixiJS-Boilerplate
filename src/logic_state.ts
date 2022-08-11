@@ -1,3 +1,4 @@
+import { Config } from "./Config";
 import { AppState } from "./Models";
 import { Subject } from "./Observer";
 
@@ -9,6 +10,9 @@ class LogicStateClass extends Subject {
 
     is_mobile = false;
     is_landscape = true;
+
+    app_width = Config.game_width;
+    app_height = Config.game_height;
 
     constructor() {
         super();
