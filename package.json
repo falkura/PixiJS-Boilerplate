@@ -1,12 +1,14 @@
 {
     "name": "pixijs-boilerplate",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Boilerplate for PixiJS + TS project",
     "main": "index.ts",
     "scripts": {
         "local": "webpack serve --config-name local",
         "dev": "webpack --config-name dev",
-        "prod": "webpack --config-name prod"
+        "prod": "webpack --config-name prod",
+        "prepare": "husky install",
+		"test": "echo hi"
     },
     "repository": {
         "type": "git",
