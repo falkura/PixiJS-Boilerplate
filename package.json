@@ -1,6 +1,6 @@
 {
     "name": "pixijs-boilerplate",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Boilerplate for PixiJS + TS project",
     "main": "index.ts",
     "scripts": {
@@ -8,7 +8,7 @@
         "dev": "webpack --config-name dev",
         "prod": "webpack --config-name prod",
         "prepare": "husky install",
-		"test": "echo hi"
+        "test": "echo hi"
     },
     "repository": {
         "type": "git",
@@ -43,7 +43,9 @@
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^9.0.0",
         "eslint": "^8.21.0",
+        "eslint-config-prettier": "^8.5.0",
         "husky": "^8.0.1",
+        "prettier": "^2.7.1",
         "raw-loader": "^4.0.2",
         "ts-loader": "^9.3.1",
         "url-loader": "^4.1.1"
