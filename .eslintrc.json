@@ -35,5 +35,16 @@
             "error",
             "always"
         ]
-    }
+    },
+    "overrides": [
+        {
+          "files": ["webpack.config.js"],
+          "rules": {
+            "no-undef": [
+                "off"
+            ]
+          }
+        }
+      ],
+    "ignorePatterns" :["dist"]
 }
