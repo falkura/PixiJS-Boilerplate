@@ -9,7 +9,8 @@
 		"prod": "webpack --config-name prod",
 		"prepare": "husky install",
 		"test": "echo hi",
-		"lint:fix-all": "eslint . --fix --quiet && prettier . -w"
+		"lint:fix-all": "eslint . --fix --quiet && prettier . -w",
+		"check": "eslint . && prettier . -c"
 	},
 	"lint-staged": {
 		"*.{js,ts}": [
