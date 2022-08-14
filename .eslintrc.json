@@ -39,7 +39,8 @@
 		{
 			"files": ["webpack.config.js"],
 			"rules": {
-				"no-undef": ["off"]
+				"no-undef": ["off"],
+				"quotes": ["off"]
 			}
 		}
 	],
