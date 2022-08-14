@@ -11,7 +11,7 @@ export function clamp(num: number, min: number, max: number) {
 }
 
 export function waitForEvent(event_type: string): Promise<Event> {
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		document.addEventListener(event_type, resolve, {
 			once: true,
 		});
@@ -19,8 +19,7 @@ export function waitForEvent(event_type: string): Promise<Event> {
 }
 
 export function get_platform() {
-	const agent =
-		navigator.userAgent || navigator.vendor || globalThis.opera;
+	const agent = navigator.userAgent || navigator.vendor || globalThis.opera;
 	if (
 		/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
 			agent
@@ -77,7 +76,7 @@ export function rescale_to_width(
 }
 
 export function sleep(ms: number) {
-	return new Promise<void>((resolve) => {
+	return new Promise<void>(resolve => {
 		delayedCallback(resolve, ms);
 	});
 }
@@ -94,7 +93,7 @@ export function pausable_sleep(ms: number) {
 		duration: ms,
 	};
 
-	const promise = new Promise((resolve) => {
+	const promise = new Promise(resolve => {
 		params.complete = resolve;
 	});
 

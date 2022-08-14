@@ -124,9 +124,6 @@ export class App {
 			EVENTS.loading.preloader_loaded,
 			this.on_preloader_loaded
 		);
-		document.addEventListener(
-			EVENTS.loading.game_loaded,
-			this.on_game_loaded
-		);
+		document.addEventListener(EVENTS.loading.game_loaded, this.on_game_loaded);
 	};
 }

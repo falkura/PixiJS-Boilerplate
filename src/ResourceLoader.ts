@@ -28,8 +28,7 @@ class Loader {
 	private getResource = (key: string): PIXI.LoaderResource | PIXI.Texture => {
 		const resource = this.resources[key];
 
-		if (!resource)
-			throw new Error(`There is no resource with name - {${key}}`);
+		if (!resource) throw new Error(`There is no resource with name - {${key}}`);
 
 		return resource;
 	};
@@ -44,8 +43,7 @@ class Loader {
 			texture = data.texture;
 		}
 
-		if (!texture)
-			throw new Error(`There is no texture with name - {${key}}`);
+		if (!texture) throw new Error(`There is no texture with name - {${key}}`);
 
 		return texture;
 	};
@@ -85,8 +83,8 @@ class Loader {
 	addResources = (type: ResourceType) => {
 		const toLoad = [ANIMATIONS, IMAGES, ATLASES];
 
-		toLoad.forEach((assetList) => {
-			assetList[type]?.forEach((asset) => {
+		toLoad.forEach(assetList => {
+			assetList[type]?.forEach(asset => {
 				this.loader.add(
 					asset.key,
 					`${SessionConfig.ASSETS_ADDRESS}${asset.path}`,
@@ -101,7 +99,7 @@ class Loader {
 			});
 
 			if (LogicState.is_mobile) {
-				assetList[`${type}Mobile`]?.forEach((asset) => {
+				assetList[`${type}Mobile`]?.forEach(asset => {
 					this.loader.add(
 						asset.key,
 						`${SessionConfig.ASSETS_ADDRESS}${asset.path}`
@@ -118,7 +116,7 @@ class Loader {
 	loadFonts = () => {
 		const newStyle = document.createElement("style");
 
-		FONTS["main"]?.forEach((font) => {
+		FONTS["main"]?.forEach(font => {
 			const extensionRaw = font.path.match(/\.[0-9a-z]+$/i);
 
 			if (!extensionRaw) {
@@ -154,7 +152,7 @@ class Loader {
 
 		document.head.appendChild(newStyle);
 
-		FONTS["main"]?.forEach((font) => {
+		FONTS["main"]?.forEach(font => {
 			const div = document.createElement("div");
 			div.innerHTML = ".";
 			div.style.fontFamily = font.key;
@@ -165,4 +163,3 @@ class Loader {
 }
 
 export const ResourceController = new Loader();
-

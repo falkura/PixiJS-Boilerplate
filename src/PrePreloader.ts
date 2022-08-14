@@ -46,11 +46,10 @@ export class PrePreloader {
 	};
 
 	update_state = () => {
-		const url =
-			`${window.location.origin}${window.location.pathname}`.replace(
-				"index.html",
-				""
-			);
+		const url = `${window.location.origin}${window.location.pathname}`.replace(
+			"index.html",
+			""
+		);
 
 		SessionConfig.ASSETS_ADDRESS = `${url}assets/`;
 		SessionConfig.API_ADDRESS = url;
@@ -61,7 +60,7 @@ export class PrePreloader {
 	}
 
 	load_assets() {
-		return new Promise<void>((resolve) => {
+		return new Promise<void>(resolve => {
 			ResourceController.addResources("preload");
 			ResourceController.loadResources(resolve);
 		});

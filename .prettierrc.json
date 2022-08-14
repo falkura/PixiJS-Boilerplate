@@ -9,7 +9,7 @@
 		{
 			"files": "webpack.config.js",
 			"options": {
-                "printWidth": 70
+				"printWidth": 70
 			}
 		},
 		{
