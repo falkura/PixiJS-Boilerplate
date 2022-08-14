@@ -1,51 +1,47 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-		"no-empty-function": "off",
-  		"@typescript-eslint/no-empty-function": ["off"],
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+		"@typescript-eslint/no-empty-function": ["off"],
 
-        "indent": [
-            "off",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    },
-    "overrides": [
-        {
-          "files": ["webpack.config.js"],
-          "rules": {
-            "no-undef": [
-                "off"
-            ]
-          }
-        }
-      ],
-    "ignorePatterns" :["dist"]
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"@typescript-eslint/array-type": [
+			"error",
+			{
+				"default": "array-simple"
+			}
+		],
+		"indent": ["off", "tab"],
+		"linebreak-style": ["error", "windows"],
+		"quotes": ["error", "double"],
+		"semi": ["error", "always"]
+	},
+	"overrides": [
+		{
+			"files": ["webpack.config.js"],
+			"rules": {
+				"no-undef": ["off"]
+			}
+		}
+	],
+	"ignorePatterns": ["dist"]
 }
