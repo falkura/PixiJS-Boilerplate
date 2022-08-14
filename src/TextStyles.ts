@@ -1,3 +1,5 @@
+// Class for PIXI.Textstyles.
+
 export const TextStyles = {
 	title: new PIXI.TextStyle({
 		fontFamily: "calibri",

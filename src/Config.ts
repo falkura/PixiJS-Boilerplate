@@ -1,8 +1,10 @@
+/** Project configurations. */
 export const Config = {
-	game_width: 1920,
-	game_height: 1080,
+	project_width: 1920,
+	project_height: 1080,
 };
 
+/** Session configurations. */
 export const SessionConfig = {
 	ASSETS_ADDRESS: "",
 	API_ADDRESS: "",

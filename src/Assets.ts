@@ -1,11 +1,11 @@
-import { Resources } from "./ResourceLoader";
+import { Resource, Resources } from "./ResourceLoader";
 
-// should be in assets/spine/
+/** Should be in assets/spine/ */
 export const ANIMATIONS: Resources = {
 	main: [],
 };
 
-// should be in assets/images
+/** Should be in assets/images/ */
 export const IMAGES: Resources = {
 	main: [
 		{
@@ -16,12 +16,10 @@ export const IMAGES: Resources = {
 	preload: [],
 };
 
-// should be in assets/atlases
+/** Should be in assets/atlases/ */
 export const ATLASES: Resources = {
 	main: [],
 };
 
-// should be in assets/fonts
-export const FONTS: Resources = {
-	main: [],
-};
+/** Should be in assets/fonts/ */
+export const FONTS: Resource[] = [];

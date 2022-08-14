@@ -2,19 +2,20 @@ import * as PIXI from "pixi.js";
 import { LogicState } from "./logic_state";
 import { PrePreloader } from "./PrePreloader";
 import { Preloader } from "./Preloader";
-import { Game } from "./Game";
+import { Main } from "./Main";
 import { Config } from "./Config";
 import { EVENTS } from "./Events";
 import { get_platform } from "./Util";
 import { ResourceController } from "./ResourceLoader";
 
+/** Application class. Contains PIXI.Application as {app} */
 export class App {
 	readonly canvas: HTMLCanvasElement;
 	readonly app: PIXI.Application;
 	readonly is_landscape: boolean = true;
 	pre_preloader?: PrePreloader;
 	preloader?: Preloader;
-	game?: Game;
+	main?: Main;
 
 	constructor() {
 		LogicState.is_mobile = get_platform();
@@ -34,13 +35,14 @@ export class App {
 		this.on_resize();
 	}
 
+	/** @returns A {@link PIXI.Application} with size from @see Config */
 	get_pixi_app = () => {
 		PIXI.settings.ROUND_PIXELS = true;
 		PIXI.settings.SORTABLE_CHILDREN = true;
 
 		return new PIXI.Application({
-			width: Config.game_width,
-			height: Config.game_height,
+			width: Config.project_width,
+			height: Config.project_height,
 			view: this.canvas,
 			sharedLoader: true,
 			sharedTicker: true,
@@ -48,6 +50,11 @@ export class App {
 		});
 	};
 
+	/**
+	 * Main App resize function.
+	 *
+	 * Callback of window.onresize function
+	 */
 	on_resize = () => {
 		if (window.innerWidth < window.innerHeight) {
 			const multiplier = window.innerWidth / LogicState.app_width;
@@ -65,13 +72,13 @@ export class App {
 			LogicState.is_landscape = true;
 		}
 
-		Config.game_width = this.app.view.width;
-		Config.game_height = this.app.view.height;
+		Config.project_width = this.app.view.width;
+		Config.project_height = this.app.view.height;
 
 		LogicState.notify_all();
 
-		if (this.game) {
-			this.game.resize();
+		if (this.main) {
+			this.main.resize();
 		} else if (this.preloader) {
 			this.preloader.resize();
 		} else if (this.pre_preloader) {
@@ -79,11 +86,13 @@ export class App {
 		}
 	};
 
+	/** Start of project loading */
 	load_preloader = () => {
 		this.pre_preloader = new PrePreloader(this.app);
 		this.app.stage.addChild(this.pre_preloader.container);
 	};
 
+	/** Starts when the {@link PrePreloader} is loaded */
 	on_preloader_loaded = () => {
 		if (this.pre_preloader) {
 			this.app.stage.removeChild(this.pre_preloader.container);
@@ -95,27 +104,24 @@ export class App {
 		LogicState.notify_all();
 	};
 
-	on_game_loaded = () => {
+	/** Project resources are fully loaded */
+	on_project_loaded = () => {
 		this.app.stage.removeChild(this.preloader!.container);
-		this.on_continue();
 
-		LogicState.notify_all();
-	};
+		this.main = new Main(this.app);
 
-	on_continue = () => {
-		this.game = new Game(this.app);
-
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// Variables for debugging
 		Object.assign(globalThis, {
-			Game: this.game,
+			main: this.main,
 			ls: LogicState,
-			App: this,
+			app: this,
 			rc: ResourceController,
-			Config: Config,
+			config: Config,
 		});
 
-		this.app.stage.addChildAt(this.game.container, 0);
-		LogicState.app_state = "game";
+		this.app.stage.addChildAt(this.main.container, 0);
+
+		LogicState.app_state = "idle";
 		LogicState.notify_all();
 	};
 
@@ -124,6 +130,6 @@ export class App {
 			EVENTS.loading.preloader_loaded,
 			this.on_preloader_loaded
 		);
-		document.addEventListener(EVENTS.loading.game_loaded, this.on_game_loaded);
+		document.addEventListener(EVENTS.loading.project_loaded, this.on_project_loaded);
 	};
 }

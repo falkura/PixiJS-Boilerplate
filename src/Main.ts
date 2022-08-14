@@ -1,7 +1,12 @@
 import { Config } from "./Config";
 import { ResourceController } from "./ResourceLoader";
 
-export class Game {
+/**
+ * Main project class. Here initializing main functionality of
+ *
+ * application, like building all UI elements, creating classes etc.
+ */
+export class Main {
 	app: PIXI.Application;
 	container = new PIXI.Container();
 	bg!: PIXI.Sprite;
@@ -26,13 +31,13 @@ export class Game {
 	add_event_listeners = () => {};
 
 	resize = () => {
-		this.bg.position.set(Config.game_width / 2, Config.game_height / 2);
+		this.bg.position.set(Config.project_width / 2, Config.project_height / 2);
 
 		this.bg.scale.set(
-			Config.game_width / this.bg.texture.width >
-				Config.game_height / this.bg.texture.height
-				? Config.game_width / this.bg.texture.width
-				: Config.game_height / this.bg.texture.height
+			Config.project_width / this.bg.texture.width >
+				Config.project_height / this.bg.texture.height
+				? Config.project_width / this.bg.texture.width
+				: Config.project_height / this.bg.texture.height
 		);
 	};
 }

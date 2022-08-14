@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const DefinePlugin = require("webpack").DefinePlugin;
 
+// Base webpack configurations.
 const common = {
 	entry: "./src/index.ts",
 
@@ -30,6 +30,7 @@ const common = {
 	},
 };
 
+// Local server config.
 const local = {
 	...common,
 
@@ -80,6 +81,7 @@ const local = {
 	],
 };
 
+// Dev build config. Contains devtools.
 const dev = {
 	...common,
 
@@ -109,6 +111,7 @@ const dev = {
 	],
 };
 
+// Productioin build config.
 const prod = {
 	...common,
 

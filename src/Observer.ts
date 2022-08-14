@@ -1,3 +1,5 @@
+// Base class for observer (OOP) design pattern
+
 export interface Observer {
 	on_state_update?: () => void;
 }

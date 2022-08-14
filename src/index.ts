@@ -4,9 +4,7 @@ import { App } from "./App";
 
 declare const __ENVIRONMENT__: string;
 
-/**
- * Entry point of application
- */
+/** Entry point of application. */
 function init() {
 	document.getElementById("root")!.onmousedown = () => {
 		return false;

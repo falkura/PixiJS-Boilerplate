@@ -2,6 +2,11 @@ import { Config } from "./Config";
 import { AppState } from "./Models";
 import { Subject } from "./Observer";
 
+/**
+ * Container for global variables of project.
+ *
+ * @extends Subject of Observer.
+ */
 class LogicStateClass extends Subject {
 	app_state: AppState = "pre_preloader";
 
@@ -11,8 +16,8 @@ class LogicStateClass extends Subject {
 	is_mobile = false;
 	is_landscape = true;
 
-	app_width = Config.game_width;
-	app_height = Config.game_height;
+	app_width = Config.project_width;
+	app_height = Config.project_height;
 
 	constructor() {
 		super();

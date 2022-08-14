@@ -3,6 +3,7 @@ import "./AudioManager";
 import { EVENTS } from "./Events";
 import { ResourceController } from "./ResourceLoader";
 
+/** Class for loading and showing project loader (the screen that we see after preloader) */
 export class Preloader {
 	readonly container: PIXI.Container;
 	private readonly app: PIXI.Application;
@@ -15,6 +16,7 @@ export class Preloader {
 		this.resize();
 	}
 
+	/** Loading assets for whole project. */
 	load_assets = () => {
 		ResourceController.addResources("main");
 
@@ -27,7 +29,7 @@ export class Preloader {
 					ResourceController.resources[atlas.key].textures
 				);
 			}
-			document.dispatchEvent(new Event(EVENTS.loading.game_loaded));
+			document.dispatchEvent(new Event(EVENTS.loading.project_loaded));
 		});
 	};
 

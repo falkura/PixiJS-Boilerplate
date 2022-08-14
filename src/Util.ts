@@ -10,16 +10,26 @@ export function clamp(num: number, min: number, max: number) {
 	return num <= min ? min : num >= max ? max : num;
 }
 
-export function waitForEvent(event_type: string): Promise<Event> {
+/**
+ * Simple event awaiter.
+ * @param event that we are waiting for dispath.
+ * @returns promise that resolves after dispatching event from params.
+ */
+export function waitForEvent(event: string): Promise<Event> {
 	return new Promise(resolve => {
-		document.addEventListener(event_type, resolve, {
+		document.addEventListener(event, resolve, {
 			once: true,
 		});
 	});
 }
 
+/**
+ * Get current platform - Mobile or not
+ * @returns true if it is mobile and false if it is not.
+ */
 export function get_platform() {
-	const agent = navigator.userAgent || navigator.vendor || globalThis.opera;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const agent = navigator.userAgent || navigator.vendor || (globalThis as any).opera;
 	if (
 		/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
 			agent
@@ -35,6 +45,14 @@ export function get_platform() {
 	}
 }
 
+/**
+ * Alternative for setTimeout. You need to use this instead of setTimeout.
+ *
+ * Don't ask why, it's necessary.
+ * @param callback
+ * @param time delay in milliseconds
+ * @returns destroy method for delayedCallback
+ */
 export function delayedCallback(callback: () => void, time: number) {
 	const ticker = PIXI.Ticker.shared;
 	let currentTime = 0;
@@ -50,37 +68,40 @@ export function delayedCallback(callback: () => void, time: number) {
 
 	ticker.add(process);
 	return {
-		process,
 		destroy: () => {
 			ticker.remove(process);
 		},
 	};
 }
 
-export function rescale_to_width(
-	target_text: PIXI.Container,
-	target_width: number,
-	scale = 0
-) {
-	if (scale) {
-		target_text.scale.set(scale);
-		return scale;
-	}
-	const scale_value = Math.min(
-		(target_text.scale.x * target_width) / target_text.width,
-		1
-	);
-	target_text.scale.set(scale_value);
+/**
+ * Scale Container or Text to target width.
+ * @param target {@link PIXI.Container} or {@link PIXI.Text} for scale.
+ * @param target_width target width.
+ * @returns scale of target.
+ */
+export function rescale_to_width(target: PIXI.Container, target_width: number) {
+	const scale_value = Math.min((target.scale.x * target_width) / target.width, 1);
+	target.scale.set(scale_value);
 
 	return scale_value;
 }
 
-export function sleep(ms: number) {
+/**
+ * Simple awaiter.
+ * @param time delay in milliseconds.
+ * @returns promise that resolves when the time runs out.
+ */
+export function sleep(time: number): Promise<void> {
 	return new Promise<void>(resolve => {
-		delayedCallback(resolve, ms);
+		delayedCallback(resolve, time);
 	});
 }
 
+/**
+ * Complete `anime` animation.
+ * @param anim anime instance.
+ */
 export function completeAnime(anim: AnimeInstance | null) {
 	if (anim && anim.complete) {
 		anim.pause();
@@ -88,9 +109,15 @@ export function completeAnime(anim: AnimeInstance | null) {
 	}
 }
 
-export function pausable_sleep(ms: number) {
+/**
+ * Creates pausable {@link sleep}
+ * @param time delay in milliseconds
+ * @returns 1. Promise that completes when the time runs out;
+ * @returns 2. AnimeInstance.
+ */
+export function pausable_sleep(time: number) {
 	const params: anime.AnimeParams = {
-		duration: ms,
+		duration: time,
 	};
 
 	const promise = new Promise(resolve => {

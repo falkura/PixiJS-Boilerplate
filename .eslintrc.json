@@ -40,7 +40,8 @@
 			"files": ["webpack.config.js"],
 			"rules": {
 				"no-undef": ["off"],
-				"quotes": ["off"]
+				"quotes": ["off"],
+				"@typescript-eslint/no-var-requires": ["off"]
 			}
 		}
 	],

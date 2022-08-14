@@ -1,6 +1,7 @@
 import { Howl, Howler } from "howler";
 import { LogicState } from "./logic_state";
 
+/** Class for loading and controlling project music and sounds. */
 class AudioManager {
 	MUSIC: Howl[] = [];
 	SOUND_FXS: Howl[] = [];
@@ -9,8 +10,21 @@ class AudioManager {
 		document.body.addEventListener("pointerdown", this.init, {
 			once: true,
 		});
+
+		window.addEventListener("blur", () => {
+			Howler.mute(true);
+		});
+
+		window.addEventListener("focus", () => {
+			if (LogicState.are_sound_fx_on && LogicState.is_music_on) {
+				Howler.mute(false);
+			}
+		});
 	}
 
+	/**
+	 * M&S initializing. Adding new {@link Howl} (sounds) as AudioManager property.
+	 */
 	init = () => {
 		// this.some_music = new Howl({
 		//     src: [`${SessionConfig.ASSETS_ADDRESS}audio/some_music.mp3`],
@@ -22,12 +36,14 @@ class AudioManager {
 		// this.SOUND_FXS.push(this.some_sound);
 	};
 
+	/** Change sounds volume. */
 	change_fx_volume = (new_volume: number) => {
 		for (const fx of this.SOUND_FXS) {
 			fx.volume(new_volume);
 		}
 	};
 
+	/** Change music volume. */
 	change_music_volume = (new_volume: number) => {
 		for (const m of this.MUSIC) {
 			m.volume(new_volume);
@@ -36,13 +52,3 @@ class AudioManager {
 }
 
 export const AUDIO_MANAGER = new AudioManager();
-
-window.addEventListener("blur", () => {
-	Howler.mute(true);
-});
-
-window.addEventListener("focus", () => {
-	if (LogicState.are_sound_fx_on && LogicState.is_music_on) {
-		Howler.mute(false);
-	}
-});

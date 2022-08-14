@@ -3,6 +3,11 @@ import { EVENTS } from "./Events";
 import { AUDIO_MANAGER } from "./AudioManager";
 import { ResourceController } from "./ResourceLoader";
 
+/**
+ * Class for loading preloader (the screen that we see after background from index.html)
+ *
+ * Main beautiful loader is loaded here.
+ */
 export class PrePreloader {
 	readonly container: PIXI.Container;
 	private readonly app: PIXI.Application;
@@ -19,6 +24,7 @@ export class PrePreloader {
 		this.load_assets().then(this.start_preloader);
 	}
 
+	/** The simplest loading animation from {@link PIXI.Graphics} only. */
 	createLoader = () => {
 		const gr = new PIXI.Graphics()
 			.lineStyle(15, 0x000000, 1)
@@ -45,6 +51,7 @@ export class PrePreloader {
 		);
 	};
 
+	/** Setting session configs. */
 	update_state = () => {
 		const url = `${window.location.origin}${window.location.pathname}`.replace(
 			"index.html",
@@ -55,10 +62,12 @@ export class PrePreloader {
 		SessionConfig.API_ADDRESS = url;
 	};
 
+	/** Font loading. */
 	load_fonts() {
 		ResourceController.loadFonts();
 	}
 
+	/** Loading assets for loader. */
 	load_assets() {
 		return new Promise<void>(resolve => {
 			ResourceController.addResources("preload");
@@ -66,6 +75,7 @@ export class PrePreloader {
 		});
 	}
 
+	/** Preloader loaded callback */
 	start_preloader() {
 		document.dispatchEvent(new Event(EVENTS.loading.preloader_loaded));
 		AUDIO_MANAGER.init();
