@@ -1,6 +1,6 @@
 {
 	"name": "pixijs-boilerplate",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"description": "Boilerplate for PixiJS + TS project",
 	"main": "index.ts",
 	"scripts": {
@@ -20,6 +20,10 @@
 		"*.json": [
 			"prettier --write"
 		]
+	},
+	"engines": {
+		"npm": ">=8.0.0",
+		"node": ">=16.0.0"
 	},
 	"repository": {
 		"type": "git",
