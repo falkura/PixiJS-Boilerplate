@@ -58,10 +58,7 @@ const local = {
 		port: 7777,
 		open: {
 			app: {
-				name:
-					process.platform == "linux"
-						? "google-chrome"
-						: "Chrome",
+				name: process.platform == "linux" ? "google-chrome" : "Chrome",
 			},
 		},
 	},

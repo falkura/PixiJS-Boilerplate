@@ -24,10 +24,7 @@ export class Preloader {
 
 		ResourceController.loadResources(() => {
 			for (const atlas of ATLASES["main"]) {
-				Object.assign(
-					ResourceController.resources,
-					ResourceController.resources[atlas.key].textures
-				);
+				Object.assign(ResourceController.resources, ResourceController.resources[atlas.key].textures);
 			}
 			document.dispatchEvent(new Event(EVENTS.loading.project_loaded));
 		});

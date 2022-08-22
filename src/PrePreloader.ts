@@ -26,9 +26,7 @@ export class PrePreloader {
 
 	/** The simplest loading animation from {@link PIXI.Graphics} only. */
 	createLoader = () => {
-		const gr = new PIXI.Graphics()
-			.lineStyle(15, 0x000000, 1)
-			.arc(0, 0, 100, 0, Math.PI);
+		const gr = new PIXI.Graphics().lineStyle(15, 0x000000, 1).arc(0, 0, 100, 0, Math.PI);
 
 		gr.position.set(this.app.view.width / 2, this.app.view.height / 2);
 
@@ -47,16 +45,13 @@ export class PrePreloader {
 			},
 			{
 				once: true,
-			}
+			},
 		);
 	};
 
 	/** Setting session configs. */
 	update_state = () => {
-		const url = `${window.location.origin}${window.location.pathname}`.replace(
-			"index.html",
-			""
-		);
+		const url = `${window.location.origin}${window.location.pathname}`.replace("index.html", "");
 
 		SessionConfig.ASSETS_ADDRESS = `${url}assets/`;
 		SessionConfig.API_ADDRESS = url;

@@ -126,10 +126,7 @@ export class App {
 	};
 
 	setup_events = () => {
-		document.addEventListener(
-			EVENTS.loading.preloader_loaded,
-			this.on_preloader_loaded
-		);
+		document.addEventListener(EVENTS.loading.preloader_loaded, this.on_preloader_loaded);
 		document.addEventListener(EVENTS.loading.project_loaded, this.on_project_loaded);
 	};
 }

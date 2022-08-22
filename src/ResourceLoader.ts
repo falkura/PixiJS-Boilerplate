@@ -85,9 +85,7 @@ class Loader {
 
 		if (!spineData) {
 			if (resource.data) {
-				throw new Error(
-					`Export spine - {${key}} for version 3.8\n Version 4 not supported.`
-				);
+				throw new Error(`Export spine - {${key}} for version 3.8\n Version 4 not supported.`);
 			} else {
 				throw new Error(`There is no spineData in resource - {${key}}`);
 			}
@@ -124,16 +122,13 @@ class Loader {
 									spineSkeletonScale: asset.spineScale || 1,
 								},
 						  }
-						: {}
+						: {},
 				);
 			});
 
 			if (LogicState.is_mobile) {
 				assetList[`${type}Mobile`]?.forEach(asset => {
-					this.loader.add(
-						asset.key,
-						`${SessionConfig.ASSETS_ADDRESS}${asset.path}`
-					);
+					this.loader.add(asset.key, `${SessionConfig.ASSETS_ADDRESS}${asset.path}`);
 				});
 			}
 		});
@@ -180,8 +175,8 @@ class Loader {
 					`@font-face {
                         font-family: "${font.key}";
                         src: url("./assets/${font.path}") format("${fontCssFormat}");
-                    }`
-				)
+                    }`,
+				),
 			);
 		});
 

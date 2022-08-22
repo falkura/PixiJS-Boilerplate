@@ -5,17 +5,11 @@
 		<meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="Cache-Control" content="no-cache" />
 		<meta http-equiv="Pragma" content="no-cache" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<title>PixiJS Boilerplate</title>
 		<!-- Normalize.css -->
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
-		/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" />
 		<style>
 			html {
 				/* background-image: url("./assets/images/project_bg.jpg"); */
@@ -55,9 +49,7 @@
 								return false;
 							}
 							var canvas = document.createElement("canvas");
-							var gl =
-								canvas.getContext("webgl", contextOptions) ||
-								canvas.getContext("experimental-webgl", contextOptions);
+							var gl = canvas.getContext("webgl", contextOptions) || canvas.getContext("experimental-webgl", contextOptions);
 							var success = !!(gl && gl.getContextAttributes().stencil);
 							if (gl) {
 								var loseContext = gl.getExtension("WEBGL_lose_context");

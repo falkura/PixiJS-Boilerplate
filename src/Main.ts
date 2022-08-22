@@ -34,10 +34,9 @@ export class Main {
 		this.bg.position.set(Config.project_width / 2, Config.project_height / 2);
 
 		this.bg.scale.set(
-			Config.project_width / this.bg.texture.width >
-				Config.project_height / this.bg.texture.height
+			Config.project_width / this.bg.texture.width > Config.project_height / this.bg.texture.height
 				? Config.project_width / this.bg.texture.width
-				: Config.project_height / this.bg.texture.height
+				: Config.project_height / this.bg.texture.height,
 		);
 	};
 }
